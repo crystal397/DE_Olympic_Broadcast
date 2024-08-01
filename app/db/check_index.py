@@ -1,4 +1,4 @@
-{
+data = {
   'generated_at': '2024-08-01T09:51:38+00:00',
   'summaries': [
     {
@@ -4028,3 +4028,9 @@
     }
   ]
 }
+
+for event in data['summaries']:
+    sport_event = event['sport_event']
+    sport_event_context = sport_event['sport_event_context']
+    sport_event_status = event['sport_event_status']
+    print(sport_event_status['winner_id'])

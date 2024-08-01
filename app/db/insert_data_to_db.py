@@ -1,10 +1,3 @@
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from datetime import datetime, timedelta
-import requests
-from confluent_kafka import Producer, Consumer, KafkaException
-import json
-import pendulum
 import psycopg2
 from psycopg2 import sql
 
@@ -12,7 +5,7 @@ from psycopg2 import sql
 def insert_sport_event_query(data: dict) -> None:
     try:
         connection = psycopg2.connect(
-            dbname='test_handball',
+            dbname='handball0',
             user='postgres',
             password='postgres',
             host='172.31.11.125',
@@ -29,6 +22,7 @@ def insert_sport_event_query(data: dict) -> None:
                     season_end_date, stage_order, stage_type, stage_phase, round_number,
                     group_id, group_name, status, match_status, home_score, away_score, winner_id
                 ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (id) DO NOTHING
                 """
             )
 
@@ -36,7 +30,7 @@ def insert_sport_event_query(data: dict) -> None:
             for event in data['summaries']:
                 sport_event = event['sport_event']
                 sport_event_context = sport_event['sport_event_context']
-                sport_event_status = sport_event['sport_event_status']
+                sport_event_status = event['sport_event_status']
                 cursor.execute(insert_query, (
                     sport_event['id'],
                     sport_event['start_time'],
@@ -61,7 +55,7 @@ def insert_sport_event_query(data: dict) -> None:
                     sport_event_status['winner_id']
                 ))
 
-                connection.commit()
+            connection.commit()
 
 
     except (Exception, psycopg2.Error) as error:
@@ -74,7 +68,7 @@ def insert_sport_event_query(data: dict) -> None:
 def insert_competitors_query(data: dict) -> None:
     try:
         connection = psycopg2.connect(
-            dbname='test_handball',
+            dbname='handball0',
             user='postgres',
             password='postgres',
             host='172.31.11.125',
@@ -89,6 +83,7 @@ def insert_competitors_query(data: dict) -> None:
                     competitor_id, event_id, name, country, country_code,
                     abbreviation, qualifier, gender
                 ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (competitor_id, event_id) DO NOTHING
                 """
             )
 
@@ -119,7 +114,7 @@ def insert_competitors_query(data: dict) -> None:
 def insert_venue_query(data: dict) -> None:
     try:
         connection = psycopg2.connect(
-            dbname='test_handball',
+            dbname='handball0',
             user='postgres',
             password='postgres',
             host='172.31.11.125',
@@ -133,6 +128,7 @@ def insert_venue_query(data: dict) -> None:
                 INSERT INTO venue (
                     id, name, city_name, country_name, map_coordinates, country_code, timezone
                 ) VALUES (%s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (id) DO NOTHING
                 """
             )
 
@@ -148,7 +144,7 @@ def insert_venue_query(data: dict) -> None:
                     venue['country_code'],
                     venue['timezone']
                 ))
-                connection.commit()
+            connection.commit()
 
 
     except (Exception, psycopg2.Error) as error:
@@ -161,7 +157,7 @@ def insert_venue_query(data: dict) -> None:
 def insert_period_scores_query(data: dict) -> None:
     try:
         connection = psycopg2.connect(
-            dbname='test_handball',
+            dbname='handball0',
             user='postgres',
             password='postgres',
             host='172.31.11.125',
@@ -175,13 +171,14 @@ def insert_period_scores_query(data: dict) -> None:
                 INSERT INTO period_scores (
                     event_id, period_number, home_score, away_score, period_type
                 ) VALUES (%s, %s, %s, %s, %s)
+                ON CONFLICT (id) DO NOTHING
                 """
             )
 
             # competitors 데이터를 데이터베이스에 삽입
             for event in data['summaries']:
                 sport_event_id = event['sport_event']['id']
-                period_scores = event['sport_event']['sport_event_status']['period_scores']
+                period_scores = event['sport_event_status']['period_scores']
                 for period_score in period_scores:
                     cursor.execute(insert_query, (
                         sport_event_id,
@@ -190,7 +187,7 @@ def insert_period_scores_query(data: dict) -> None:
                         period_score['away_score'],
                         period_score['type']
                     ))
-                connection.commit()
+            connection.commit()
 
 
     except (Exception, psycopg2.Error) as error:
