@@ -49,7 +49,6 @@ def send_data_kafka2db():
 
 
 def process_message(data: dict) -> None:
-
     try:
         connection = psycopg2.connect(
             dbname='test_handball',
