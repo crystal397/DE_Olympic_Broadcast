@@ -17,17 +17,41 @@ KAFKA_TOPIC = 'airflow2kafka0'
 KAFKA_BOOTSTRAP_SERVERS = '172.31.14.224:9092'
 
 
-def api_call():
+def api_call1():
     api_key = "v2N0vnCAYCa1O6kJNvua38itKyxguVzln2MVwcAd"
+    locale = 'ko'
     # date = datetime.now().strftime('%Y-%m-%d')
-    date = '2024-07-30'
-    url = f"https://api.sportradar.com/handball/production/v2/ko/schedules/{date}/summaries?offset=0&limit=1&api_key={api_key}"
+    # date = '2024-07-30'
+    urn_season = 'sr:season:105529' # 올림픽 토너먼트 남자 2024
+    # urn_season = 'sr:season:105531' # 올림픽 토너먼트 여자 2024
+    offset = '0'
+    limit = '5'
+    start = '0'
+
+    url = f"https://api.sportradar.com/handball/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}8&api_key={api_key}"
     headers = {"accept": "application/json"}
     response = requests.get(url, headers=headers)
     data = response.json() # data: Dict
     # data = response.text
     return data
 
+def api_call2():
+    api_key = "v2N0vnCAYCa1O6kJNvua38itKyxguVzln2MVwcAd"
+    locale = 'ko'
+    # date = datetime.now().strftime('%Y-%m-%d')
+    # date = '2024-07-30'
+    # urn_season = 'sr:season:105529' # 올림픽 토너먼트 남자 2024
+    urn_season = 'sr:season:105531' # 올림픽 토너먼트 여자 2024
+    offset = '0'
+    limit = '5'
+    start = '0'
+
+    url = f"https://api.sportradar.com/handball/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}8&api_key={api_key}"
+    headers = {"accept": "application/json"}
+    response = requests.get(url, headers=headers)
+    data = response.json() # data: Dict
+    # data = response.text
+    return data
 
 def send_data_to_kafka(**kwargs):
     ti = kwargs['ti']
@@ -67,9 +91,14 @@ with DAG(
         catchup=False,
         default_args=default_args,
 ) as dag:
-    api_call = PythonOperator(
-        task_id='api_call',
-        python_callable=api_call,
+    api_call1 = PythonOperator(
+        task_id='api_call1',
+        python_callable=api_call1,
+    )
+
+    api_call2 = PythonOperator(
+        task_id='api_call2',
+        python_callable=api_call2,
     )
 
     send_data_to_kafka_task = PythonOperator(
@@ -77,4 +106,4 @@ with DAG(
         python_callable=send_data_to_kafka,
     )
 
-    api_call >> send_data_to_kafka_task
+    api_call1 >> send_data_to_kafka_task >> api_call2 >> send_data_to_kafka_task
