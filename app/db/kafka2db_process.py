@@ -7,6 +7,7 @@ import json
 import pendulum
 import psycopg2
 from psycopg2 import sql
+from insert_data_to_db import insert_sport_event_query, insert_competitors_query, insert_venue_query, insert_period_scores_query
 
 # airflow 실행(pyenv activate doto)
 # nohup airflow webserver --port 8880 > ~/airflow/logs/webserver.log 2>&1 &
@@ -42,50 +43,15 @@ def send_data_kafka2db():
             pass
         message = msg.value().decode('utf-8')
         data = json.loads(message)
-        # print('data :', data)
+        print('data :', data)
 
-        process_message(data)
+        insert_sport_event_query(data)
+        insert_competitors_query(data)
+        insert_venue_query(data)
+        insert_period_scores_query(data)
     consumer.close()
 
 
-def process_message(data: dict) -> None:
-    try:
-        connection = psycopg2.connect(
-            dbname='test_handball',
-            user='postgres',
-            password='postgres',
-            host='172.31.11.125',
-            port='5432'
-        )
-
-        with connection.cursor() as cursor:
-            # SQL 문 구성
-            insert_query = sql.SQL(
-                """
-                INSERT INTO competitors (competitor_id, name, country, country_code, abbreviation, qualifier, gender)
-                VALUES (%s, %s, %s, %s, %s, %s, %s)
-                """
-            )
-
-            # competitors 데이터를 데이터베이스에 삽입
-            for competitor in data['summaries'][0]['sport_event']['competitors']:
-                cursor.execute(insert_query, (
-                    competitor['id'],
-                    competitor['name'],
-                    competitor['country'],
-                    competitor['country_code'],
-                    competitor['abbreviation'],
-                    competitor['qualifier'],
-                    competitor['gender']
-                ))
-                connection.commit()
-
-
-    except (Exception, psycopg2.Error) as error:
-        print("Error while inserting to PostgreSQL", error)
-    finally:
-        if connection:
-            connection.close()
 
 
 if __name__ == '__main__':
