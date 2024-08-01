@@ -16,7 +16,7 @@ KAFKA_BOOTSTRAP_SERVERS = '172.31.14.224:9092'
 
 def api_call(param):
     # 핸드볼 api로 바꿔야 할 부분
-    api_key = "CgFIFfP8hc5XngDXfvNE26zWyoZH8PSx8JQH6hHG"
+    api_key = "v2N0vnCAYCa1O6kJNvua38itKyxguVzln2MVwcAd"
     schedules_live_timelines_url = f'{param}{api_key}'
     headers = {"accept": "application/json"}
     response = requests.get(schedules_live_timelines_url, headers=headers)
