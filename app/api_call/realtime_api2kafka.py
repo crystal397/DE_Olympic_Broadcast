@@ -84,13 +84,13 @@ default_args = {
 }
 
 # DAG 설정
-with DAG(
+with (DAG(
         dag_id='realtime_api2kafka',
         schedule=None,  # "* * * * *",
         start_date=pendulum.datetime(2024, 7, 29, tz="Asia/Seoul"),
         catchup=False,
         default_args=default_args,
-) as dag:
+) as dag):
     api_call1 = PythonOperator(
         task_id='api_call1',
         python_callable=api_call1,
@@ -106,4 +106,5 @@ with DAG(
         python_callable=send_data_to_kafka,
     )
 
-    api_call1 >> send_data_to_kafka_task >> api_call2 >> send_data_to_kafka_task
+    api_call1 >> send_data_to_kafka_task
+    api_call2 >> send_data_to_kafka_task

@@ -21,7 +21,7 @@ def send_data_kafka2db():
     conf = {
         'bootstrap.servers': f'{KAFKA_BOOTSTRAP_SERVERS}',  # Kafka 서버 주소
         'group.id': '2', # logstash
-        'auto.offset.reset': 'earliest',  # 'latest', 'earliest'
+        'auto.offset.reset': 'latest',  # 'latest', 'earliest'
         'enable.auto.commit': True,  # 오프셋 자동 커밋 설정
         # 'session.timeout.ms': 10000,  # 세션 타임아웃 설정
     }
@@ -40,14 +40,15 @@ def send_data_kafka2db():
             print("ERROR: %s".format(msg.error()))
         else:
             pass
-        data = msg.value().decode('utf-8')
-        print('data :', data)
+        message = msg.value().decode('utf-8')
+        data = json.loads(message)
+        # print('data :', data)
+
         process_message(data)
     consumer.close()
 
 
-def process_message(message: str) -> None:
-    data = json.loads(message)
+def process_message(data: dict) -> None:
 
     try:
         connection = psycopg2.connect(
