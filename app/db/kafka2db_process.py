@@ -1,12 +1,5 @@
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from datetime import datetime, timedelta
-import requests
 from confluent_kafka import Producer, Consumer, KafkaException
 import json
-import pendulum
-import psycopg2
-from psycopg2 import sql
 from insert_data_to_db import insert_sport_event_query, insert_competitors_query, insert_venue_query, insert_period_scores_query
 import logging
 
