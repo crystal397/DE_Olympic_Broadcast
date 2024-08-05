@@ -36,20 +36,20 @@ def api_call1():
     return data
 
 def api_call2():
-    api_key = "v2N0vnCAYCa1O6kJNvua38itKyxguVzln2MVwcAd"
+    api_key = "wvXo03TWeoarYw4KMy6Fj7Q4pDYYeLXP1qS8EU9o"
     locale = 'ko'
     # date = datetime.now().strftime('%Y-%m-%d')
     # date = '2024-07-30'
-    # urn_season = 'sr%3Aseason%3A105529' # 올림픽 토너먼트 남자 2024
-    urn_season = 'sr%3Aseason%3A105531' # 올림픽 토너먼트 여자 2024
+    # urn_season = 'sr%3Aseason%3A105521'  # 올림픽 토너먼트 남자 2024 sr:season:105521 sr:competition:551
+    urn_season = 'sr%3Aseason%3A105523' # 올림픽 토너먼트 여자 2024 sr:season:105523 sr:competition:552
     offset = '0'
     limit = '5'
     start = '0'
 
-    url = f"https://api.sportradar.com/handball/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}&api_key={api_key}"
+    url = f"https://api.sportradar.com/beachvolleyball/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}&api_key={api_key}"
     headers = {"accept": "application/json"}
     response = requests.get(url, headers=headers)
-    data = response.json() # data: Dict
+    data = response.json()  # data: Dict
     # data = response.text
     return data
 
@@ -101,7 +101,7 @@ default_args = {
 
 # DAG 설정
 with DAG(
-        dag_id='realtime_api2kafka',
+        dag_id='beach_volleyball_api_call',
         schedule=None,  # "* * * * *",
         start_date=pendulum.datetime(2024, 7, 29, tz="Asia/Seoul"),
         catchup=False,
