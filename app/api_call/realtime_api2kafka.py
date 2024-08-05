@@ -22,8 +22,8 @@ def api_call1():
     locale = 'ko'
     # date = datetime.now().strftime('%Y-%m-%d')
     # date = '2024-07-30'
-    urn_season = 'sr%3Aseason%3A105529' # 올림픽 토너먼트 남자 2024
-    # urn_season = 'sr%3Aseason%3A105531' # 올림픽 토너먼트 여자 2024
+    urn_season = 'sr%3Aseason%3A105529' # 올림픽 토너먼트 핸드볼 남자 2024
+    # urn_season = 'sr%3Aseason%3A105531' # 올림픽 토너먼트 핸드볼 여자 2024
     offset = '0'
     limit = '5'
     start = '0'
@@ -40,8 +40,8 @@ def api_call2():
     locale = 'ko'
     # date = datetime.now().strftime('%Y-%m-%d')
     # date = '2024-07-30'
-    # urn_season = 'sr%3Aseason%3A105529' # 올림픽 토너먼트 남자 2024
-    urn_season = 'sr%3Aseason%3A105531' # 올림픽 토너먼트 여자 2024
+    # urn_season = 'sr%3Aseason%3A105529' # 올림픽 토너먼트 핸드볼 남자 2024
+    urn_season = 'sr%3Aseason%3A105531' # 올림픽 토너먼트 핸드볼 여자 2024
     offset = '0'
     limit = '5'
     start = '0'
