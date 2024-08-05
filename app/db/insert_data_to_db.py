@@ -91,7 +91,7 @@ def insert_competitors_query(data: dict) -> None:
                     competitor_id, event_id, name, country, country_code,
                     abbreviation, qualifier, gender
                 ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-                ON CONFLICT (competitor_id, event_id) 
+                ON CONFLICT (competitor_id, event_id)
                 DO UPDATE SET
                     name = EXCLUDED.name,
                     country = EXCLUDED.country,
@@ -100,6 +100,21 @@ def insert_competitors_query(data: dict) -> None:
                     qualifier = EXCLUDED.qualifier,
                     gender = EXCLUDED.gender
                 """
+                # """
+                # INSERT INTO competitors (
+                #     competitor_id, event_id, name, country, country_code,
+                #     abbreviation, qualifier, gender
+                # ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                # ON CONFLICT (competitor_id)
+                # DO UPDATE SET
+                #     event_id = EXCLUDED.event_id
+                #     name = EXCLUDED.name,
+                #     country = EXCLUDED.country,
+                #     country_code = EXCLUDED.country_code,
+                #     abbreviation = EXCLUDED.abbreviation,
+                #     qualifier = EXCLUDED.qualifier,
+                #     gender = EXCLUDED.gender
+                # """
             )
 
             for event in data['summaries']:

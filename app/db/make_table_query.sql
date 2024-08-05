@@ -63,3 +63,6 @@ CREATE TABLE period_scores (
 );
 ALTER TABLE period_scores
 ADD CONSTRAINT unique_event_period UNIQUE (event_id, period_number);
+
+ALTER TABLE competitors
+ADD CONSTRAINT unique_competitors_id UNIQUE (competitor_id, event_id);
