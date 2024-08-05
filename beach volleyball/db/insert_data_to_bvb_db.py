@@ -134,7 +134,7 @@ def insert_competitors_query(data: dict) -> None:
                             competitor.get('qualifier'),
                             competitor.get('gender')
                         ))
-                connection.commit()
+            connection.commit()
 
     except (Exception, psycopg2.Error) as error:
         print("Error while inserting competitors to PostgreSQL:", error)
