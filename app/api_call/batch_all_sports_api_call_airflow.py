@@ -1,8 +1,20 @@
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from datetime import datetime, timedelta
 import requests
-from confluent_kafka import Producer
+from confluent_kafka import Producer, Consumer, KafkaException
 import json
-import time
+import pendulum
+import psycopg2
+from psycopg2 import sql
 
+# airflow 실행(pyenv activate doto)
+# nohup airflow webserver --port 8880 > ~/airflow/logs/webserver.log 2>&1 &
+# nohup airflow scheduler > ~/airflow/logs/scheduler.log 2>&1 &
+
+# Kafka 설정
+KAFKA_TOPIC = 'airflow2kafka0'
+KAFKA_BOOTSTRAP_SERVERS = '172.31.14.224:9092'
 
 sports = ['tabletennis', 'beachvolleyball', 'badminton', 'handball']
 urn_season_codes = {
@@ -13,10 +25,7 @@ urn_season_codes = {
 }
 
 
-KAFKA_TOPIC = 'airflow2kafka0'
-KAFKA_BOOTSTRAP_SERVERS = '172.31.14.224:9092'
-
-def api_call(sport: str, urn_season: str) -> dict:
+def api_call():
     # date = datetime.now().strftime('%Y-%m-%d')
     # date = '2024-07-30'
 
@@ -34,26 +43,53 @@ def api_call(sport: str, urn_season: str) -> dict:
     return data
 
 
-def send_data_to_kafka1(data: dict) -> None:
+def send_data_to_kafka(**kwargs):
+    ti = kwargs['ti']
+    data = ti.xcom_pull(task_ids='api_call')
+
     producer = Producer({'bootstrap.servers': KAFKA_BOOTSTRAP_SERVERS})
 
-    def delivery_report(err, data):
+    def delivery_report(err, msg):
         if err is not None:
             print('Message delivery failed: {}'.format(err))
         else:
-            print('Message delivered to {}'.format(data))
+            print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
 
+    # producer.produce(KAFKA_TOPIC, key=str(record['id']), value=json.dumps(data), callback=delivery_report)
     producer.produce(KAFKA_TOPIC, value=json.dumps(data), callback=delivery_report)
     # value : str
-    producer.poll(1)
+    producer.poll(600)
     producer.flush()
 
 
-if __name__ == '__main__':
-    try:
-        for sport in sports:
-            for urn_season in urn_season_codes[sport]:
-                data = api_call(sport, urn_season)
-                send_data_to_kafka1(data)
-    except KeyboardInterrupt:
-        print("프로그램이 중지되었습니다.")
+
+default_args = {
+    'owner': 'airflow',
+    'depends_on_past': False,
+    'email_on_failure': False,
+    'email_on_retry': False,
+    'retries': 1,
+    'retry_delay': timedelta(seconds=10),
+}
+
+# DAG 설정
+with DAG(
+        dag_id='realtime_api2kafka',
+        schedule=None,  # "* * * * *",
+        start_date=pendulum.datetime(2024, 7, 29, tz="Asia/Seoul"),
+        catchup=False,
+        default_args=default_args,
+) as dag:
+    api_call = PythonOperator(
+        task_id='api_call',
+        python_callable=api_call,
+    )
+
+    send_data_to_kafka_task = PythonOperator(
+        task_id='send_data_to_kafka',
+        python_callable=send_data_to_kafka,
+    )
+
+
+
+    api_call >> send_data_to_kafka_task

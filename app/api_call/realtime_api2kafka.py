@@ -25,7 +25,7 @@ def api_call1():
     urn_season = 'sr%3Aseason%3A105529' # 올림픽 토너먼트 핸드볼 남자 2024
     # urn_season = 'sr%3Aseason%3A105531' # 올림픽 토너먼트 핸드볼 여자 2024
     offset = '0'
-    limit = '50'
+    limit = '15'
     start = '0'
 
     url = f"https://api.sportradar.com/handball/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}&api_key={api_key}"
@@ -43,7 +43,7 @@ def api_call2():
     # urn_season = 'sr%3Aseason%3A105529' # 올림픽 토너먼트 핸드볼 남자 2024
     urn_season = 'sr%3Aseason%3A105531' # 올림픽 토너먼트 핸드볼 여자 2024
     offset = '0'
-    limit = '5'
+    limit = '15'
     start = '0'
 
     url = f"https://api.sportradar.com/handball/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}&api_key={api_key}"
