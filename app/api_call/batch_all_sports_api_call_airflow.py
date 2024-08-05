@@ -537,7 +537,7 @@ default_args = {
 
 # DAG 설정
 with DAG(
-        dag_id='realtime_api2kafka',
+        dag_id='batch_all_sports_api_call',
         schedule=None,  # "* * * * *",
         start_date=pendulum.datetime(2024, 7, 29, tz="Asia/Seoul"),
         catchup=False,
