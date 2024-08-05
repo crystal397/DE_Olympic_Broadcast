@@ -3,10 +3,6 @@ import json
 from insert_data_to_db import insert_sport_event_query, insert_competitors_query, insert_venue_query, insert_period_scores_query
 import logging
 
-# airflow 실행(pyenv activate doto)
-# nohup airflow webserver --port 8880 > ~/airflow/logs/webserver.log 2>&1 &
-# nohup airflow scheduler > ~/airflow/logs/scheduler.log 2>&1 &
-
 # Kafka 설정
 KAFKA_TOPIC = 'airflow2kafka0'
 KAFKA_BOOTSTRAP_SERVERS = '172.31.14.224:9092'
@@ -38,7 +34,13 @@ def send_data_kafka2db():
             pass
         message = msg.value().decode('utf-8')
         data = json.loads(message)
-        print('data :', data)
+
+        if isinstance(data, dict) and data == {'message': 'Limit Exceeded'}:
+            print("오류! {'message': 'Limit Exceeded'}입니다.")
+            continue
+        else:
+            # print('data :', data)
+            pass
 
         insert_sport_event_query(data)
         insert_competitors_query(data)
