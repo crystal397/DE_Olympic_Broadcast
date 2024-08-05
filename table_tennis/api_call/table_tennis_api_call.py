@@ -22,8 +22,8 @@ def api_call1():
     locale = 'ko'
     # date = datetime.now().strftime('%Y-%m-%d')
     # date = '2024-07-30'
-    urn_season = 'sr%3Aseason%3A105599'  # 올림픽 토너먼트 단식 남자 2024 sr:season:105599
-    # urn_season = 'sr%3Aseason%3A105603' # 올림픽 토너먼트 단식 여자 2024 sr:season:105603
+    urn_season = 'sr%3Aseason%3A105599'  # 올림픽 토너먼트 탁구 단식 남자 2024 sr:season:105599
+    # urn_season = 'sr%3Aseason%3A105603' # 올림픽 토너먼트 탁구 단식 여자 2024 sr:season:105603
     offset = '0'
     limit = '5'
     start = '0'
@@ -41,8 +41,8 @@ def api_call2():
     locale = 'ko'
     # date = datetime.now().strftime('%Y-%m-%d')
     # date = '2024-07-30'
-    # urn_season = 'sr%3Aseason%3A105599'  # 올림픽 토너먼트 단식 남자 2024 sr:season:105599
-    urn_season = 'sr%3Aseason%3A105603'  # 올림픽 토너먼트 단식 여자 2024 sr:season:105603
+    # urn_season = 'sr%3Aseason%3A105599'  # 올림픽 토너먼트 탁구 단식 남자 2024 sr:season:105599
+    urn_season = 'sr%3Aseason%3A105603'  # 올림픽 토너먼트 탁구 단식 여자 2024 sr:season:105603
     offset = '0'
     limit = '5'
     start = '0'
@@ -60,8 +60,8 @@ def api_call3():
     locale = 'ko'
     # date = datetime.now().strftime('%Y-%m-%d')
     # date = '2024-07-30'
-    urn_season = 'sr%3Aseason%3A105601'  # 올림픽 토너먼트 복식 남자 2024 sr:season:105601
-    # urn_season = 'sr%3Aseason%3A105605' # 올림픽 토너먼트 복식 여자 2024 sr:season:105605
+    urn_season = 'sr%3Aseason%3A105601'  # 올림픽 토너먼트 탁구 복식 남자 2024 sr:season:105601
+    # urn_season = 'sr%3Aseason%3A105605' # 올림픽 토너먼트 탁구 복식 여자 2024 sr:season:105605
     offset = '0'
     limit = '5'
     start = '0'
@@ -79,8 +79,8 @@ def api_call4():
     locale = 'ko'
     # date = datetime.now().strftime('%Y-%m-%d')
     # date = '2024-07-30'
-    # urn_season = 'sr%3Aseason%3A105601'  # 올림픽 토너먼트 복식 남자 2024 sr:season:105601
-    urn_season = 'sr%3Aseason%3A105605'  # 올림픽 토너먼트 복식 여자 2024 sr:season:105605
+    # urn_season = 'sr%3Aseason%3A105601'  # 올림픽 토너먼트 탁구 복식 남자 2024 sr:season:105601
+    urn_season = 'sr%3Aseason%3A105605'  # 올림픽 토너먼트 탁구 복식 여자 2024 sr:season:105605
     offset = '0'
     limit = '5'
     start = '0'
