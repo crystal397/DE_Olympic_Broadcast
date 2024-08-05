@@ -34,7 +34,7 @@ def api_call(sport: str, urn_season: str) -> dict:
     return data
 
 
-def send_data_to_kafka1(data: dict) -> None:
+def send_data_to_kafka(data: dict) -> None:
     producer = Producer({'bootstrap.servers': KAFKA_BOOTSTRAP_SERVERS})
 
     def delivery_report(err, data):
@@ -54,6 +54,6 @@ if __name__ == '__main__':
         for sport in sports:
             for urn_season in urn_season_codes[sport]:
                 data = api_call(sport, urn_season)
-                send_data_to_kafka1(data)
+                send_data_to_kafka(data)
     except KeyboardInterrupt:
         print("프로그램이 중지되었습니다.")
