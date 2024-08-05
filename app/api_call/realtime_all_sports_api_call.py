@@ -80,6 +80,7 @@ if __name__ == '__main__':
                     data = api_call(sport, urn_season)
                     send_data_to_kafka1(data)
                     print(data)
-                    time.sleep(1)
+                    time.sleep(5)
+            time.sleep(20)
     except KeyboardInterrupt:
         print("프로그램이 중지되었습니다.")
