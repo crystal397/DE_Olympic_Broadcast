@@ -1,0 +1,205 @@
+{
+  "generated_at": "2024-08-05T01:15:47+00:00",
+  "summaries": [
+    {
+      "sport_event": {
+        "id": "sr:sport_event:51353135",
+        "start_time": "2024-07-27T12:00:00+00:00",
+        "start_time_confirmed": true,
+        "sport_event_context": {
+          "sport": {
+            "id": "sr:sport:34",
+            "name": "Beach Volley"
+          },
+          "category": {
+            "id": "sr:category:290",
+            "name": "International"
+          },
+          "competition": {
+            "id": "sr:competition:551",
+            "name": "Olympic Tournament",
+            "gender": "men"
+          },
+          "season": {
+            "id": "sr:season:105521",
+            "name": "Olympic Games 2024",
+            "start_date": "2024-07-27",
+            "end_date": "2024-08-10",
+            "year": "2024",
+            "competition_id": "sr:competition:551"
+          },
+          "stage": {
+            "order": 1,
+            "type": "league",
+            "phase": "regular season",
+            "start_date": "2024-07-27",
+            "end_date": "2024-08-03",
+            "year": "2024"
+          },
+          "round": {
+            "number": 1
+          },
+          "groups": [
+            {
+              "id": "sr:league:84661",
+              "name": "Olympic Tournament 2024, Group D",
+              "group_name": "D"
+            }
+          ]
+        },
+        "coverage": {
+          "live": true
+        },
+        "competitors": [
+          {
+            "id": "sr:competitor:954559",
+            "name": "Benesh A / Partain M",
+            "country": "USA",
+            "country_code": "USA",
+            "abbreviation": "BEPA",
+            "qualifier": "home",
+            "gender": "male"
+          },
+          {
+            "id": "sr:competitor:906907",
+            "name": "Alayo Moliner J L / Diaz Amaro N",
+            "country": "Cuba",
+            "country_code": "CUB",
+            "abbreviation": "AMDA",
+            "qualifier": "away",
+            "gender": "male"
+          }
+        ],
+        "venue": {
+          "id": "sr:venue:78873",
+          "name": "Eiffel Tower Stadium",
+          "city_name": "Paris",
+          "country_name": "France",
+          "country_code": "FRA",
+          "timezone": "Europe/Paris"
+        }
+      },
+      "sport_event_status": {
+        "status": "closed",
+        "match_status": "ended",
+        "home_score": 0,
+        "away_score": 2,
+        "winner_id": "sr:competitor:906907",
+        "period_scores": [
+          {
+            "home_score": 18,
+            "away_score": 21,
+            "type": "regular_period",
+            "number": 1
+          },
+          {
+            "home_score": 18,
+            "away_score": 21,
+            "type": "regular_period",
+            "number": 2
+          }
+        ]
+      }
+    },
+    {
+      "sport_event": {
+        "id": "sr:sport_event:51353035",
+        "start_time": "2024-07-27T13:00:00+00:00",
+        "start_time_confirmed": true,
+        "sport_event_context": {
+          "sport": {
+            "id": "sr:sport:34",
+            "name": "Beach Volley"
+          },
+          "category": {
+            "id": "sr:category:290",
+            "name": "International"
+          },
+          "competition": {
+            "id": "sr:competition:551",
+            "name": "Olympic Tournament",
+            "gender": "men"
+          },
+          "season": {
+            "id": "sr:season:105521",
+            "name": "Olympic Games 2024",
+            "start_date": "2024-07-27",
+            "end_date": "2024-08-10",
+            "year": "2024",
+            "competition_id": "sr:competition:551"
+          },
+          "stage": {
+            "order": 1,
+            "type": "league",
+            "phase": "regular season",
+            "start_date": "2024-07-27",
+            "end_date": "2024-08-03",
+            "year": "2024"
+          },
+          "round": {
+            "number": 1
+          },
+          "groups": [
+            {
+              "id": "sr:league:84655",
+              "name": "Olympic Tournament 2024, Group A",
+              "group_name": "A"
+            }
+          ]
+        },
+        "coverage": {
+          "live": true
+        },
+        "competitors": [
+          {
+            "id": "sr:competitor:441078",
+            "name": "Aahman D / Hellvig J",
+            "country": "Sweden",
+            "country_code": "SWE",
+            "abbreviation": "AAHE",
+            "qualifier": "home",
+            "gender": "male"
+          },
+          {
+            "id": "sr:competitor:896445",
+            "name": "Carracher I / Nicolaidis M",
+            "country": "Australia",
+            "country_code": "AUS",
+            "abbreviation": "CANI",
+            "qualifier": "away",
+            "gender": "male"
+          }
+        ],
+        "venue": {
+          "id": "sr:venue:78873",
+          "name": "Eiffel Tower Stadium",
+          "city_name": "Paris",
+          "country_name": "France",
+          "country_code": "FRA",
+          "timezone": "Europe/Paris"
+        }
+      },
+      "sport_event_status": {
+        "status": "closed",
+        "match_status": "ended",
+        "home_score": 2,
+        "away_score": 0,
+        "winner_id": "sr:competitor:441078",
+        "period_scores": [
+          {
+            "home_score": 21,
+            "away_score": 14,
+            "type": "regular_period",
+            "number": 1
+          },
+          {
+            "home_score": 21,
+            "away_score": 19,
+            "type": "regular_period",
+            "number": 2
+          }
+        ]
+      }
+    }
+  ]
+}
