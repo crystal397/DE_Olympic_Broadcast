@@ -4,7 +4,7 @@ from psycopg2 import sql
 def insert_sport_event_query(data: dict) -> None:
     try:
         connection = psycopg2.connect(
-            dbname='badminton',
+            dbname='badminton0',
             user='postgres',
             password='postgres',
             host='172.31.11.125',
@@ -90,7 +90,7 @@ def insert_sport_event_query(data: dict) -> None:
 def insert_competitors_query(data: dict) -> None:
     try:
         connection = psycopg2.connect(
-            dbname='badminton',
+            dbname='badminton0',
             user='postgres',
             password='postgres',
             host='172.31.11.125',
@@ -144,7 +144,7 @@ def insert_competitors_query(data: dict) -> None:
 def insert_venue_query(data: dict) -> None:
     try:
         connection = psycopg2.connect(
-            dbname='badminton',
+            dbname='badminton0',
             user='postgres',
             password='postgres',
             host='172.31.11.125',
@@ -188,3 +188,52 @@ def insert_venue_query(data: dict) -> None:
     except (Exception, psycopg2.Error) as error:
         print("Error while inserting venue to PostgreSQL:", error)
     finally:
+        if connection:
+            connection.close()
+
+def insert_period_scores_query(data: dict) -> None:
+    try:
+        connection = psycopg2.connect(
+            dbname='badminton0',
+            user='postgres',
+            password='postgres',
+            host='172.31.11.125',
+            port='5432'
+        )
+
+        with connection.cursor() as cursor:
+            insert_query = sql.SQL(
+                """
+                INSERT INTO period_scores (
+                    event_id, period_number, home_score, away_score, period_type
+                ) VALUES (%s, %s, %s, %s, %s)
+                ON CONFLICT (event_id, period_number) 
+                DO UPDATE SET
+                    home_score = EXCLUDED.home_score,
+                    away_score = EXCLUDED.away_score,
+                    period_type = EXCLUDED.period_type
+                """
+            )
+
+            for event in data['summaries']:
+                sport_event_id = event['sport_event'].get('id')
+                period_scores = event['sport_event_status'].get('period_scores', [])
+                for period_score in period_scores:
+                    period_number = period_score.get('number')
+
+                    # sport_event_id나 period_number가 None이면 쿼리를 실행하지 않음
+                    if sport_event_id is not None and period_number is not None:
+                        cursor.execute(insert_query, (
+                            sport_event_id,
+                            period_number,
+                            period_score.get('home_score'),
+                            period_score.get('away_score'),
+                            period_score.get('type')
+                        ))
+            connection.commit()
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error while inserting period_scores to PostgreSQL:", error)
+    finally:
+        if connection:
+            connection.close()
