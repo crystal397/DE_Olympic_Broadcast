@@ -46,7 +46,7 @@ def api_call(sport: str, urn_season: str) -> dict:
     api_key = "v2N0vnCAYCa1O6kJNvua38itKyxguVzln2MVwcAd"
     locale = 'ko'
     offset = '0'
-    limit = '5'
+    limit = '10'
     start = '0'
 
     url = f"https://api.sportradar.com/{sport}/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}&api_key={api_key}"
