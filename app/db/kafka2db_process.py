@@ -42,14 +42,18 @@ def send_data_kafka2db():
             print('data :', data)
             pass
 
-        sport_event_context = data['summaries'][0]['sport_event']['sport_event_context']
-        if sport_event_context.get('sport', {}).get('name') == '핸드볼':
-            insert_sport_event_query(data)
-            insert_competitors_query(data)
-            insert_venue_query(data)
-            insert_period_scores_query(data)
-        else:
-            print(f"핸드볼 데이터가 아닙니다. {sport_event_context.get('sport', {}).get('name')}입니다.")
+        try:
+            sport_event_context = data['summaries'][0]['sport_event']['sport_event_context']
+            if sport_event_context.get('sport', {}).get('name') == '핸드볼':
+                insert_sport_event_query(data)
+                insert_competitors_query(data)
+                insert_venue_query(data)
+                insert_period_scores_query(data)
+            else:
+                print(f"핸드볼 데이터가 아닙니다. {sport_event_context.get('sport', {}).get('name')}입니다.")
+        except KeyError:
+            print("data 형식 error")
+            continue
     consumer.close()
 
 
