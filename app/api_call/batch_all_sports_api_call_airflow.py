@@ -5,8 +5,7 @@ import requests
 from confluent_kafka import Producer, Consumer, KafkaException
 import json
 import pendulum
-import psycopg2
-from psycopg2 import sql
+
 
 # airflow 실행(pyenv activate doto)
 # nohup airflow webserver --port 8880 > ~/airflow/logs/webserver.log 2>&1 &

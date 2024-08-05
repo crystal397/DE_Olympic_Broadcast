@@ -1,7 +1,7 @@
 import requests
 from confluent_kafka import Producer
 import json
-import time
+
 
 
 sports = ['tabletennis', 'beachvolleyball', 'badminton', 'handball']
