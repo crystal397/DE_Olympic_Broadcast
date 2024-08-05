@@ -158,7 +158,7 @@ def insert_venue_query(data: dict) -> None:
 
             for event in data['summaries']:
                 venue = event['sport_event'].get('venue', {})
-                venue_id = venue.get('id')
+                venue_id = venue.get('id', None)
 
                 # venue_id가 None이면 쿼리를 실행하지 않음
                 if venue_id is not None:
@@ -171,6 +171,8 @@ def insert_venue_query(data: dict) -> None:
                         venue.get('country_code'),
                         venue.get('timezone')
                     ))
+                else:
+                    print("Skipping venue with missing ID:", venue)
             connection.commit()
 
     except (Exception, psycopg2.Error) as error:
