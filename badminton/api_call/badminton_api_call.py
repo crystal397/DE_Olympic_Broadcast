@@ -217,7 +217,7 @@ default_args = {
 
 # DAG 설정
 with DAG(
-        dag_id='beach_volleyball_api_call',
+        dag_id='badminton_api_call',
         schedule=None,  # "* * * * *",
         start_date=pendulum.datetime(2024, 7, 29, tz="Asia/Seoul"),
         catchup=False,
@@ -259,18 +259,18 @@ with DAG(
     )
 
     send_data_to_kafka_task3 = PythonOperator(
-        task_id='send_data_to_kafka2',
-        python_callable=send_data_to_kafka2,
+        task_id='send_data_to_kafka3',
+        python_callable=send_data_to_kafka3,
     )
 
     send_data_to_kafka_task4 = PythonOperator(
-        task_id='send_data_to_kafka2',
-        python_callable=send_data_to_kafka2,
+        task_id='send_data_to_kafka4',
+        python_callable=send_data_to_kafka4,
     )
 
     send_data_to_kafka_task5 = PythonOperator(
-        task_id='send_data_to_kafka2',
-        python_callable=send_data_to_kafka2,
+        task_id='send_data_to_kafka5',
+        python_callable=send_data_to_kafka5,
     )
 
     api_call1 >> send_data_to_kafka_task1 >> api_call2 >> send_data_to_kafka_task2 >> api_call3 >> send_data_to_kafka_task3 >> api_call4 >> send_data_to_kafka_task4 >> api_call5 >> send_data_to_kafka_task5
