@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 def send_data_kafka2db():
     conf = {
         'bootstrap.servers': f'{KAFKA_BOOTSTRAP_SERVERS}',  # Kafka 서버 주소
-        'group.id': '2', # logstash, 2
+        'group.id': 'realtime_handball', # logstash, 2
         'auto.offset.reset': 'latest',  # 'latest', 'earliest'
         'enable.auto.commit': True,  # 오프셋 자동 커밋 설정
         # 'session.timeout.ms': 10000,  # 세션 타임아웃 설정
@@ -42,7 +42,7 @@ def send_data_kafka2db():
             print('data :', data)
             pass
 
-        sport_event_context = data['summaries']['sport_event']['sport_event_context']
+        sport_event_context = data['summaries'][0]['sport_event']['sport_event_context']
         if sport_event_context.get('sport', {}).get('name') == '핸드볼':
             insert_sport_event_query(data)
             insert_competitors_query(data)
