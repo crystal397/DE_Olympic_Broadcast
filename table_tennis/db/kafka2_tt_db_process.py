@@ -1,6 +1,6 @@
 from confluent_kafka import Producer, Consumer, KafkaException
 import json
-from insert_data_to_db import insert_sport_event_query, insert_competitors_query, insert_venue_query, insert_period_scores_query
+from insert_data_to_tt_db import insert_sport_event_query, insert_competitors_query, insert_venue_query, insert_period_scores_query
 import logging
 
 # Kafka 설정
@@ -42,8 +42,8 @@ def send_data_kafka2db():
             print('data :', data)
             pass
 
-        sport_event_context = data['summaries']['sport_event']['sport_event_context']
-        if sport_event_context.get('sport', {}).get('name') == '핸드볼':
+        sport_event_context = data['summaries'][0]['sport_event']['sport_event_context']
+        if sport_event_context.get('sport', {}).get('name') == '탁구':
             insert_sport_event_query(data)
             insert_competitors_query(data)
             insert_venue_query(data)

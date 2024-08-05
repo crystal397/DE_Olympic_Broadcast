@@ -60,3 +60,6 @@ CREATE TABLE period_scores (
     CONSTRAINT fk_event FOREIGN KEY (event_id) REFERENCES sport_event(id)
 );
 --    CONSTRAINT unique_event_period UNIQUE (event_id, period_number)
+
+ALTER TABLE period_scores
+ADD CONSTRAINT unique_event_period UNIQUE (event_id, period_number);

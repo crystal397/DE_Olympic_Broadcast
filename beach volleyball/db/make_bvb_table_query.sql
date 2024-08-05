@@ -63,5 +63,8 @@ CREATE TABLE period_scores (
 --     CONSTRAINT unique_event_period UNIQUE (event_id, period_number)
 
 -- 외래 키 설정
-ALTER TABLE sport_event
-ADD CONSTRAINT fk_winner FOREIGN KEY (winner_id) REFERENCES competitors(competitor_id);
+-- ALTER TABLE sport_event
+-- ADD CONSTRAINT fk_winner FOREIGN KEY (winner_id) REFERENCES competitors(competitor_id);
+
+ALTER TABLE period_scores
+ADD CONSTRAINT unique_event_period UNIQUE (event_id, period_number);
