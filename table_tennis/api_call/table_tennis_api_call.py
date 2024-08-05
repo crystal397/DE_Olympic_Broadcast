@@ -180,7 +180,7 @@ default_args = {
 
 # DAG 설정
 with DAG(
-        dag_id='badminton_api_call',
+        dag_id='table_tennis_api_call',
         schedule=None,  # "* * * * *",
         start_date=pendulum.datetime(2024, 7, 29, tz="Asia/Seoul"),
         catchup=False,
