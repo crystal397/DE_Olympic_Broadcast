@@ -25,7 +25,7 @@ def api_call1():
     urn_season = 'sr%3Aseason%3A105599'  # 올림픽 토너먼트 탁구 단식 남자 2024 sr:season:105599
     # urn_season = 'sr%3Aseason%3A105603' # 올림픽 토너먼트 탁구 단식 여자 2024 sr:season:105603
     offset = '0'
-    limit = '5'
+    limit = '50'
     start = '0'
 
     url = f"https://api.sportradar.com/tabletennis/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}&api_key={api_key}"

@@ -25,7 +25,7 @@ def api_call1():
     urn_season = 'sr%3Aseason%3A105521' # 올림픽 토너먼트 비치 발리볼 남자 2024 sr:season:105521 sr:competition:551
     # urn_season = 'sr%3Aseason%3A105523' # 올림픽 토너먼트 비치 발리볼 여자 2024 sr:season:105523 sr:competition:552
     offset = '0'
-    limit = '5'
+    limit = '50'
     start = '0'
 
     url = f"https://api.sportradar.com/beachvolleyball/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}&api_key={api_key}"

@@ -25,7 +25,7 @@ def api_call1():
     urn_season = 'sr%3Aseason%3A105549'  # 올림픽 토너먼트 배드민턴 단식 남자 2024 sr:season:105549
     # urn_season = 'sr%3Aseason%3A105515' # 올림픽 토너먼트 배드민턴 단식 여자 2024 sr:season:105515
     offset = '0'
-    limit = '5'
+    limit = '50'
     start = '0'
 
     url = f"https://api.sportradar.com/badminton/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}&api_key={api_key}"
@@ -44,7 +44,7 @@ def api_call2():
     # urn_season = 'sr%3Aseason%3A105549'  # 올림픽 토너먼트 배드민턴 단식 남자 2024 sr:season:105549
     urn_season = 'sr%3Aseason%3A105515'  # 올림픽 토너먼트 배드민턴 단식 여자 2024 sr:season:105515
     offset = '0'
-    limit = '5'
+    limit = '50'
     start = '0'
 
     url = f"https://api.sportradar.com/badminton/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}&api_key={api_key}"
@@ -63,7 +63,7 @@ def api_call3():
     urn_season = 'sr%3Aseason%3A119999'  # 올림픽 토너먼트 배드민턴 복식 남자 2024 sr:season:119999
     # urn_season = 'sr%3Aseason%3A105551' # 올림픽 토너먼트 배드민턴 복식 여자 2024 sr:season:105551
     offset = '0'
-    limit = '5'
+    limit = '50'
     start = '0'
 
     url = f"https://api.sportradar.com/badminton/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}&api_key={api_key}"
@@ -82,7 +82,7 @@ def api_call4():
     # urn_season = 'sr%3Aseason%3A119999' # 올림픽 토너먼트 배드민턴 복식 남자 2024 sr:season:119999
     urn_season = 'sr%3Aseason%3A105551'  # 올림픽 토너먼트 배드민턴 복식 여자 2024 sr:season:105551
     offset = '0'
-    limit = '5'
+    limit = '50'
     start = '0'
 
     url = f"https://api.sportradar.com/badminton/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}&api_key={api_key}"
@@ -100,7 +100,7 @@ def api_call5():
     # date = '2024-07-30'
     urn_season = 'sr%3Aseason%3A105553'  # 올림픽 토너먼트 배드민턴 복식 혼성 2024 sr:season:105553
     offset = '0'
-    limit = '5'
+    limit = '50'
     start = '0'
 
     url = f"https://api.sportradar.com/badminton/trial/v2/{locale}/seasons/{urn_season}/summaries?offset={offset}&limit={limit}&start={start}&api_key={api_key}"
