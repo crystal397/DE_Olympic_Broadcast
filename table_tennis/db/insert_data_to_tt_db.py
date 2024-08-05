@@ -4,7 +4,7 @@ from psycopg2 import sql
 def insert_sport_event_query(data: dict) -> None:
     try:
         connection = psycopg2.connect(
-            dbname='badminton0',
+            dbname='tabletennis0',
             user='postgres',
             password='postgres',
             host='172.31.11.125',
@@ -16,10 +16,10 @@ def insert_sport_event_query(data: dict) -> None:
                 """
                 INSERT INTO sport_event (
                     id, start_time, start_time_confirmed, sport_name, category_name,
-                    competition_name, competition_gender, season_name, season_start_date,
-                    season_end_date, stage_order, stage_type, stage_phase, round_number,
-                    group_id, group_name, status, match_status, home_score, away_score, winner_id, venue_id
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    competition_name, competition_type, competition_gender, season_name, season_start_date,
+                    season_end_date, stage_order, stage_type, stage_phase, round_number, round_name,
+                    group_id, group_name, best_of, status, match_status, home_score, away_score, winner_id, venue_id
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 ON CONFLICT (id) 
                 DO UPDATE SET 
                     start_time = EXCLUDED.start_time,
@@ -27,6 +27,7 @@ def insert_sport_event_query(data: dict) -> None:
                     sport_name = EXCLUDED.sport_name,
                     category_name = EXCLUDED.category_name,
                     competition_name = EXCLUDED.competition_name,
+                    competition_type = EXCLUDED.competition_type,
                     competition_gender = EXCLUDED.competition_gender,
                     season_name = EXCLUDED.season_name,
                     season_start_date = EXCLUDED.season_start_date,
@@ -35,8 +36,10 @@ def insert_sport_event_query(data: dict) -> None:
                     stage_type = EXCLUDED.stage_type,
                     stage_phase = EXCLUDED.stage_phase,
                     round_number = EXCLUDED.round_number,
+                    round_name = EXCLUDED.round_name,
                     group_id = EXCLUDED.group_id,
                     group_name = EXCLUDED.group_name,
+                    best_of = EXCLUDED.best_of,
                     status = EXCLUDED.status,
                     match_status = EXCLUDED.match_status,
                     home_score = EXCLUDED.home_score,
@@ -61,6 +64,7 @@ def insert_sport_event_query(data: dict) -> None:
                         sport_event_context.get('sport', {}).get('name'),
                         sport_event_context.get('category', {}).get('name'),
                         sport_event_context.get('competition', {}).get('name'),
+                        sport_event_context.get('competition', {}).get('type'),
                         sport_event_context.get('competition', {}).get('gender'),
                         sport_event_context.get('season', {}).get('name'),
                         sport_event_context.get('season', {}).get('start_date'),
@@ -69,8 +73,10 @@ def insert_sport_event_query(data: dict) -> None:
                         sport_event_context.get('stage', {}).get('type'),
                         sport_event_context.get('stage', {}).get('phase'),
                         sport_event_context.get('round', {}).get('number'),
+                        sport_event_context.get('round', {}).get('name'),
                         sport_event_context.get('groups', [{}])[0].get('id'),
-                        sport_event_context.get('groups', [{}])[0].get('group_name'),
+                        sport_event_context.get('groups', [{}])[0].get('name'),
+                        sport_event_context.get('mode', {}).get('best_of'),
                         sport_event_status.get('status'),
                         sport_event_status.get('match_status'),
                         sport_event_status.get('home_score'),
@@ -90,7 +96,7 @@ def insert_sport_event_query(data: dict) -> None:
 def insert_competitors_query(data: dict) -> None:
     try:
         connection = psycopg2.connect(
-            dbname='badminton0',
+            dbname='tabletennis0',
             user='postgres',
             password='postgres',
             host='172.31.11.125',
@@ -102,8 +108,8 @@ def insert_competitors_query(data: dict) -> None:
                 """
                 INSERT INTO competitors (
                     competitor_id, event_id, name, country, country_code,
-                    abbreviation, qualifier, date_of_birth
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    abbreviation, qualifier, gender, date_of_birth
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 ON CONFLICT (competitor_id, event_id) 
                 DO UPDATE SET
                     name = EXCLUDED.name,
@@ -111,6 +117,7 @@ def insert_competitors_query(data: dict) -> None:
                     country_code = EXCLUDED.country_code,
                     abbreviation = EXCLUDED.abbreviation,
                     qualifier = EXCLUDED.qualifier,
+                    gender = EXCLUDED.gender,
                     date_of_birth = EXCLUDED.date_of_birth
                 """
             )
@@ -131,6 +138,7 @@ def insert_competitors_query(data: dict) -> None:
                             competitor.get('country_code'),
                             competitor.get('abbreviation'),
                             competitor.get('qualifier'),
+                            competitor.get('gender'),
                             competitor.get('date_of_birth')
                         ))
                 connection.commit()
@@ -144,7 +152,7 @@ def insert_competitors_query(data: dict) -> None:
 def insert_venue_query(data: dict) -> None:
     try:
         connection = psycopg2.connect(
-            dbname='badminton0',
+            dbname='tabletennis0',
             user='postgres',
             password='postgres',
             host='172.31.11.125',
@@ -194,7 +202,7 @@ def insert_venue_query(data: dict) -> None:
 def insert_period_scores_query(data: dict) -> None:
     try:
         connection = psycopg2.connect(
-            dbname='badminton0',
+            dbname='tabletennis0',
             user='postgres',
             password='postgres',
             host='172.31.11.125',
