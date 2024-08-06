@@ -22,7 +22,7 @@
   - Kibana: Elastic search 데이터를 시각화하여 실시간 대시보드와 리포트 제공
   - Spark/Jupyter Lab: PostgreSQL 데이터를 불러와서 데이터프레임 생성 및 시각화
 
-![image](https://github.com/user-attachments/assets/9b495fbf-c7e9-4888-8f3a-eae1d42ccdbe)
+![image (5)](https://github.com/user-attachments/assets/7a3cd3a8-962e-4fa4-aa2c-2a6b5bb94a62)
 
 서버1	서버2	서버3
 Airflow: 8880	Elastic Search: 9200	PostgreSQL: 5432
