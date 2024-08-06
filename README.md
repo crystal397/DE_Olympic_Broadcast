@@ -23,9 +23,3 @@
   - Spark/Jupyter Lab: PostgreSQL 데이터를 불러와서 데이터프레임 생성 및 시각화
 
 ![image (5)](https://github.com/user-attachments/assets/7a3cd3a8-962e-4fa4-aa2c-2a6b5bb94a62)
-
-서버1	서버2	서버3
-Airflow: 8880	Elastic Search: 9200	PostgreSQL: 5432
-Spark: 8080	Kibana: 5601	
-Jupyter Lab: 8888		
-Kafka: 9092		<img width="768" alt="image" src="https://github.com/user-attachments/assets/0ef0c145-f4e3-45b9-8a69-e1643e2029fb">
