@@ -15,7 +15,7 @@ import pendulum
 KAFKA_TOPIC = 'airflow2kafka0'
 KAFKA_BOOTSTRAP_SERVERS = '172.31.14.224:9092'
 
-sports = ['tabletennis', 'beachvolleyball', 'badminton', 'handball']
+sports = ['tabletennis', 'beachvolleyball', 'badminton', 'api_call']
 urn_season_codes = {
     'tabletennis': ['sr%3Aseason%3A105599', 'sr%3Aseason%3A84976', 'sr%3Aseason%3A34299', 'sr%3Aseason%3A105603',
                     'sr%3Aseason%3A84978', 'sr%3Aseason%3A34301', 'sr%3Aseason%3A105601', 'sr%3Aseason%3A84982',
@@ -370,7 +370,7 @@ urn_season_codes = {
                   'sr%3Aseason%3A116767', 'sr%3Aseason%3A103679', 'sr%3Aseason%3A113541', 'sr%3Aseason%3A113543',
                   'sr%3Aseason%3A113545', 'sr%3Aseason%3A113547', 'sr%3Aseason%3A113549', 'sr%3Aseason%3A121973',
                   'sr%3Aseason%3A121975', 'sr%3Aseason%3A121977', 'sr%3Aseason%3A121979', 'sr%3Aseason%3A121981'],
-    'handball': ['sr%3Aseason%3A95481', 'sr%3Aseason%3A107719', 'sr%3Aseason%3A120389', 'sr%3Aseason%3A95011',
+    'api_call': ['sr%3Aseason%3A95481', 'sr%3Aseason%3A107719', 'sr%3Aseason%3A120389', 'sr%3Aseason%3A95011',
                  'sr%3Aseason%3A107545', 'sr%3Aseason%3A120309', 'sr%3Aseason%3A95595', 'sr%3Aseason%3A107537',
                  'sr%3Aseason%3A121331', 'sr%3Aseason%3A95835', 'sr%3Aseason%3A108163', 'sr%3Aseason%3A121317',
                  'sr%3Aseason%3A95833', 'sr%3Aseason%3A108165', 'sr%3Aseason%3A121325', 'sr%3Aseason%3A2302',

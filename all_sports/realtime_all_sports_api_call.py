@@ -23,17 +23,17 @@ urn_season = 'sr%3Aseason%3A119999'  # 올림픽 토너먼트 배드민턴 복�
 urn_season = 'sr%3Aseason%3A105551'  # 올림픽 토너먼트 배드민턴 복식 여자 2024 sr:season:105551
 urn_season = 'sr%3Aseason%3A105553'  # 올림픽 토너먼트 배드민턴 복식 혼성 2024 sr:season:105553
 
-sport = 'handball'
+sport = 'api_call'
 urn_season = 'sr%3Aseason%3A105529'  # 올림픽 토너먼트 핸드볼 남자 2024 sr:season:105529
 urn_season = 'sr%3Aseason%3A105531'  # 올림픽 토너먼트 핸드볼 여자 2024 sr:season:105531
 '''
 
-sports = ['tabletennis', 'beachvolleyball', 'badminton', 'handball']
+sports = ['tabletennis', 'beachvolleyball', 'badminton', 'api_call']
 urn_season_codes = {
     'tabletennis': ['sr%3Aseason%3A105599', 'sr%3Aseason%3A105603', 'sr%3Aseason%3A105601', 'sr%3Aseason%3A105605'],
     'beachvolleyball': ['sr%3Aseason%3A105521', 'sr%3Aseason%3A105523', 'sr%3Aseason%3A105521', 'sr%3Aseason%3A105523'],
     'badminton': ['sr%3Aseason%3A105549', 'sr%3Aseason%3A105515', 'sr%3Aseason%3A119999', 'sr%3Aseason%3A105551', 'sr%3Aseason%3A105553'],
-    'handball': ['sr%3Aseason%3A105529', 'sr%3Aseason%3A105531']
+    'api_call': ['sr%3Aseason%3A105529', 'sr%3Aseason%3A105531']
 }
 
 KAFKA_TOPIC = 'airflow2kafka0'
