@@ -57,6 +57,7 @@ if __name__ == '__main__':
             datas = gen_data()
             for data in datas:
                 send_data_to_kafka(data)
+                print(data)
                 time.sleep(1)
             time.sleep(1)
     except KeyboardInterrupt:
