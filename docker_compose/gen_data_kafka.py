@@ -3,9 +3,10 @@ import requests
 from confluent_kafka import Producer
 import json
 
-KAFKA_TOPIC = 'airflow2kafka0'
-KAFKA_BOOTSTRAP_SERVERS = '172.31.14.224:9092'
-# KAFKA_BOOTSTRAP_SERVERS = '172.31.14.224:29092'
+# KAFKA_TOPIC = 'airflow2kafka0'
+KAFKA_TOPIC = 'test-topic'
+KAFKA_BOOTSTRAP_SERVERS = '172.31.14.224:9092,172.31.12.74:9092,172.31.11.125:9092'
+# KAFKA_BOOTSTRAP_SERVERS = '172.31.14.224:9092'
 
 def gen_data() -> list[str]:
     lyrics = [
@@ -59,7 +60,7 @@ if __name__ == '__main__':
             for data in datas:
                 send_data_to_kafka(data)
                 print(data)
-                time.sleep(1)
+                time.sleep(2)
             time.sleep(1)
     except KeyboardInterrupt:
         print("프로그램이 중지되었습니다.")
