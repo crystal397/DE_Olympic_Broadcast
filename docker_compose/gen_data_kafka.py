@@ -5,6 +5,7 @@ import json
 
 KAFKA_TOPIC = 'airflow2kafka0'
 KAFKA_BOOTSTRAP_SERVERS = '172.31.14.224:9092'
+# KAFKA_BOOTSTRAP_SERVERS = '172.31.14.224:29092'
 
 def gen_data() -> list[str]:
     lyrics = [
@@ -45,7 +46,7 @@ def send_data_to_kafka(data: str) -> None:
         else:
             print('Message delivered to {}'.format(data))
 
-    producer.produce(KAFKA_TOPIC, value=json.dumps(data), callback=delivery_report)
+    producer.produce(KAFKA_TOPIC, value=data, callback=delivery_report)
     # value : str
     producer.poll(1)
     producer.flush()
