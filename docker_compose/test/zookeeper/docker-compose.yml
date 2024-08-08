@@ -1,6 +1,5 @@
 # 시도
 
-version: 'doc'
 
 services:
   zookeeper:
