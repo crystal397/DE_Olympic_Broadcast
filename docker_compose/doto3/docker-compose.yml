@@ -51,7 +51,7 @@ services:
       # doto2 : 172.31.12.74
       # doto3 : 172.31.11.125
 
-      #docker exec --workdir /opt/kafka/bin/ -it kafka1 sh
+      #docker exec --workdir /opt/kafka/bin/ -it kafka3 sh
       #./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test-topic
       #./kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test-topic
       #./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-topic --from-beginning
